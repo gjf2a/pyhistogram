@@ -26,7 +26,7 @@ class Histogram:
         return max([(count, key) for (key, count) in self.hist.items()])[1]
 
     def ranking(self):
-        return [(key, count) for (count,key) in sorted([(count, key) for (key, count) in self.hist.items()])]
+        return [(key, count) for (count,key) in reversed(sorted([(count, key) for (key, count) in self.hist.items()]))]
 
 
 class TestHistogram(unittest.TestCase):
@@ -43,3 +43,4 @@ class TestHistogram(unittest.TestCase):
         self.assertEqual(len(values), len(hist.all_labels()))
         self.assertEqual(sum(values), hist.total_count())
         self.assertEqual(2, hist.mode())
+        self.assertEqual([(2, 20), (1, 15), (0, 10)], hist.ranking())
